@@ -1,0 +1,31 @@
+# Terraform/OpenTofu
+*.tfstate
+*.tfstate.*
+.terraform/
+.crash
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+tofu.d/
+
+# Ansible
+*.retry
+
+# Python (falls Skripte)
+__pycache__/
+*.pyc
+
+# Node (falls Skripte/CLIs)
+node_modules/
+
+# Secrets & SOPS Artefakte
+*.env
+*.dec.yaml
+*.dec.yml
+*.dec.json
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
