@@ -1,0 +1,36 @@
+name: Lint & Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tofu:
+    name: OpenTofu fmt & validate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tofu
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: "1.7.0"
+      - name: tofu fmt
+        run: tofu fmt -check -recursive || (echo "::warning::Formatting differences found" && exit 1)
+      - name: tofu init (local backend, safe)
+        run: tofu init -backend=false
+      - name: tofu validate (no backend)
+        run: tofu validate
+
+  ansible:
+    name: Ansible syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Ansible
+        run: |
+          python3 -m pip install --user ansible-core
+      - name: Syntax check playbook
+        run: ansible-playbook ansible/site.yml --syntax-check -i ansible/inventory.example
