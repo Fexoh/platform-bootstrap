@@ -1,0 +1,24 @@
+name: Tofu plan
+on:
+  pull_request:
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.HCLOUD_S3_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.HCLOUD_S3_SECRET_KEY }}
+    defaults:
+      run:
+        working-directory: infra/
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Opentofu
+        uses: opentofu/setup-opentofu@v1
+
+      - name: Tofu Init
+        run: tofu init
+
+      - name: Tofu Plan
+        run: tofu plan

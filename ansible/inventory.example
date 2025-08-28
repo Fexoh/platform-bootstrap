@@ -1,2 +1,0 @@
-[gitlab]
-gitlab-bootstrap ansible_host=CHANGE_ME_BOOTSTRAP_IP ansible_user=root
