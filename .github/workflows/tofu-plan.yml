@@ -1,54 +1,21 @@
-name: Plan (no apply)
-
+name: Tofu plan
 on:
-  # Manual trigger (secrets available)
-  workflow_dispatch:
-  # Plans on direct pushes from branches in this repo
-  push:
-    paths: ['tofu/**']
-  # Validate-only on PRs (no secrets)
   pull_request:
-    paths: ['tofu/**']
-
 jobs:
-  validate:
-    name: OpenTofu validate (no backend)
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tofu
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@v1
-        with:
-          tofu_version: "1.7.0"
-      - name: Init (no backend)
-        run: tofu init -backend=false
-      - name: Validate
-        run: tofu validate
-
   plan:
-    name: OpenTofu plan (requires secrets)
     runs-on: ubuntu-latest
-    needs: validate
-    if: github.event_name != 'pull_request'   # <-- skip on PRs (no secrets)
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.HCLOUD_S3_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.HCLOUD_S3_SECRET_KEY }}
     defaults:
       run:
-        working-directory: tofu
+        working-directory: infra/
     steps:
-      - uses: actions/checkout@v4
-      - name: Install OpenTofu
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Opentofu
         uses: opentofu/setup-opentofu@v1
-        with:
-          tofu_version: "1.7.0"
-      - name: Init (no backend)
-        run: tofu init -backend=false
-      - name: Plan
-        env:
-          HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
-        run: |
-          tofu plan \
-            -var="hcloud_token=${HCLOUD_TOKEN}" \
-            -var-file="environments/on-prem/example.tfvars" \
-            -lock=false -input=false
+
+      - name: Tofu Plan
+        run: tofu plan
