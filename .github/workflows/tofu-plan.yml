@@ -17,5 +17,8 @@ jobs:
       - name: Setup Opentofu
         uses: opentofu/setup-opentofu@v1
 
+      - name: Tofu Init
+        run: tofu init
+
       - name: Tofu Plan
         run: tofu plan
