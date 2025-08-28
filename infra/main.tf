@@ -2,12 +2,8 @@ terraform {
   required_version = ">= 1.6.0"
   backend "s3" {
     bucket     = "tofu-state-backend"
-    key        = "test" # Path to the state file inside the S3 bucket
-    access_key = ""
-    secret_key = ""
-    endpoints = {
-      s3 = "fsn1.your-objectstorage.com" # Endpoint override
-    }
+    key        = "opentofu.tfstate" # Path to the state file inside the S3 bucket
+    endpoint = "fsn1.your-objectstorage.com" # Endpoint override
 
     region                      = "hcloud"
     skip_credentials_validation = true
