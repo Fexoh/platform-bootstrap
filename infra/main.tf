@@ -32,9 +32,9 @@ terraform {
 #   token = var.hcloud_token
 # }
 
-provider "proxmox" {
-
-}
+# provider "proxmox" {
+# 
+# }
 
 # Example-resource (placeholder):
 # resource "null_resource" "example" {
