@@ -6,6 +6,6 @@
 
 variable "region" {
   description = "Default HCloud location/region"
-  type = string
-  default = "fsn1"
+  type        = string
+  default     = "fsn1"
 }
