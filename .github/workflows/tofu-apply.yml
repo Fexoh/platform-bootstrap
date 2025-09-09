@@ -1,6 +1,0 @@
-name: Tofu apply
-on:
-  workflow_dispatch:
-jobs:
-  apply:
-    runs-on: ubuntu-latest
