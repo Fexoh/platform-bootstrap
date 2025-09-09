@@ -10,6 +10,10 @@ permissions:
   id-token: write        # if you use OIDC anywhere
   actions: read
 
+defaults:
+  run:
+    working-directory: infra
+
 jobs:
   apply-staging:
     runs-on: ubuntu-latest

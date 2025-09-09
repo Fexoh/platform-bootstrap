@@ -9,6 +9,10 @@ permissions:
   id-token: write
   actions: read
 
+defaults:
+  run:
+    working-directory: infra
+
 jobs:
   apply-prod:
     runs-on: ubuntu-latest
