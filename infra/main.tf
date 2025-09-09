@@ -13,7 +13,7 @@ terraform {
   }
   required_providers {
     # Add providers as needed. For example:
-    hcloud  = { source = "hetznercloud/hcloud", version = ">= 1.48.0" }
+    # hcloud  = { source = "hetznercloud/hcloud", version = ">= 1.48.0" }
     # proxmox = { source = "telmate/proxmox", version = ">= 3.0.0" }
     # tls    = { source = "hashicorp/tls", version = ">= 4.0.0" }
     # null   = { source = "hashicorp/null", version = ">= 3.0.0" }
