@@ -1,8 +1,8 @@
 terraform {
   required_version = ">= 1.6.0"
   backend "s3" {
-    bucket     = "tofu-state-backend"
-    key        = "opentofu.tfstate" # Path to the state file inside the S3 bucket
+    bucket   = "tofu-state-backend"
+    key      = "opentofu.tfstate"            # Path to the state file inside the S3 bucket
     endpoint = "fsn1.your-objectstorage.com" # Endpoint override
 
     region                      = "hcloud"
