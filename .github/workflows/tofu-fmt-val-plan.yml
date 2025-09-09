@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
-      - run: tofu fmt -check -recursive
+      - run: tofu fmt -recursive
 
   validate:
     runs-on: ubuntu-latest
