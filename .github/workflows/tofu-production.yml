@@ -1,0 +1,27 @@
+name: Production apply
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+  actions: read
+
+jobs:
+  apply-prod:
+    runs-on: ubuntu-latest
+    # environment: production
+    env:
+      AWS_ACCESS_KEY_ID:     ${{ secrets.HCLOUD_S3_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.HCLOUD_S3_SECRET_KEY }}
+      AWS_DEFAULT_REGION: eu-central
+      # Production TF_VAR_* here
+    steps:
+      - uses: actions/checkout@v4
+      - uses: opentofu/setup-opentofu@v1
+      - name: Init (prod)
+        run: tofu init
+      - name: Apply (prod)
+        run: tofu apply -auto-approve -input=false
