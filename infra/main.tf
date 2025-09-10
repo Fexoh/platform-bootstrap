@@ -1,8 +1,8 @@
 terraform {
   required_version = ">= 1.6.0"
   backend "s3" {
-    bucket         = "tofu-state-backend"
-    key            = "opentofu.tfstate"                                                                     # Path to the state file inside the S3 bucket
+    bucket   = "tofu-state-backend"
+    key      = "opentofu.tfstate"                                                                     # Path to the state file inside the S3 bucket
     endpoint = "https://8705ca58998c25e90952292cfeb5eeae.r2.cloudflarestorage.com/tofu-state-backend" # Endpoint override
 
     region                      = "weur"
