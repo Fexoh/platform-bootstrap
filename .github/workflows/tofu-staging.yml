@@ -19,8 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     env:
-      AWS_ACCESS_KEY_ID:     ${{ secrets.HCLOUD_S3_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.HCLOUD_S3_SECRET_KEY }}
+      AWS_ACCESS_KEY_ID:     ${{ secrets.CLOUDFLARE_S3_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_S3_SECRET_KEY }}
       AWS_DEFAULT_REGION: eu-central
       # Any staging-specific TF_VAR_* go here
     steps:

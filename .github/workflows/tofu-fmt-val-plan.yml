@@ -20,14 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
-      - run: tofu fmt -recursive
+      - run: tofu fmt -check -recursive
 
   validate:
     runs-on: ubuntu-latest
     needs: fmt
     env:
-      AWS_ACCESS_KEY_ID:     ${{ secrets.HCLOUD_S3_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.HCLOUD_S3_SECRET_KEY }}
+      AWS_ACCESS_KEY_ID:     ${{ secrets.CLOUDFLARE_S3_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_S3_SECRET_KEY }}
       AWS_DEFAULT_REGION: eu-central
     steps:
       - uses: actions/checkout@v4
@@ -42,8 +42,8 @@ jobs:
     needs: validate
     if: ${{ success() }}   # only if fmt & validate passed
     env:
-      AWS_ACCESS_KEY_ID:     ${{ secrets.HCLOUD_S3_ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.HCLOUD_S3_SECRET_KEY }}
+      AWS_ACCESS_KEY_ID:     ${{ secrets.CLOUDFLARE_S3_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_S3_SECRET_KEY }}
       AWS_DEFAULT_REGION: eu-central
     outputs:
       plan_path: plan.txt
