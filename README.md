@@ -1,13 +1,11 @@
 # platform-bootstrap
-Bootstrap and total disaster-recovery:
-- provisions a VPS/dedicated Server
-- installs GitLab + Runnter
-- mirrors repos to GitLab
-- starts DR/Seed-pipelines
-
-## Why separate from production-repos?
-This is so GitHub Actions can take over the Bootstrapping/Total-DR process,
-even when GitLab fails in the cloud and/or on-prem.
+- manages infrastructure using HCL (OpenTofu)
+- deploys and configures services to managed infra (if possible using OpenTofu, else using nixos/ansible)
+- manages on-prem resources
+- can provision and manage cloud resources as needed
+- manages backups and infra state (S3)
+- checks for updates, stages and tests them before deploying if successful
+- monitors for downtime, manages HA and runs disaster recovery
 
 ## Security
 - no plain-text secrets -> SOPS/age or CI-Secret store
